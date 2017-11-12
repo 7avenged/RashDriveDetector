@@ -6,10 +6,10 @@ import csv
 csvfile = open('data_log.csv', 'wb') #open file for operation
 writer = csv.writer(csvfile) 
 
-ser = serial.Serial("/dev/ttyACM1", 9600)
-#ser = serial.Serial("/dev/rfcomm0", 9600)
+#ser = serial.Serial("/dev/ttyACM5", 9600)
+ser = serial.Serial("/dev/rfcomm0", 9600)
 a=0 
-while a!=120:
+while a!=150:
     print ser.readline()    
     k = ser.readline()
     angle,vin,vfin = k.split(",")
@@ -32,8 +32,8 @@ while a!=120:
     else :
        tempvin = "-"           
        #writer.writerow([angle, vin,vfin, accel,"-"])
-    if vin <1:  #for initial sudden accelration
-       if accel > 1: #some random acceleration threshold
+    if vin <=1:  #for initial sudden accelration        #############################
+       if accel >= 1: #some random acceleration threshold ##############################
           tempaccel = "sudden acceleration(A2)"
           #tempvin = "-"    
           #writer.writerow([angle, vin,vfin, accel,"LIMIT CROSSED!","sudden acceleration(A2)"]) 
@@ -45,8 +45,8 @@ while a!=120:
        #tempvin = "-"
        tempaccel = "-"      
           #writer.writerow([angle, vin,vfin, accel,"LIMIT CROSSED!","-"])	
-    if vfin<1:    #for initial sudden deaccelration
-         if accel<0.1: #some random deacceleration threshold
+    if vfin<=1:    #for initial sudden deaccelration     #########################
+         if accel<=1: #some random deacceleration threshold ################################
             tempdeaccel = " sudden stop(A3) "
             #tempaccel = "-"
             #tempvin = "-" 
