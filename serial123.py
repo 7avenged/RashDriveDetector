@@ -16,16 +16,17 @@ while a!=150:
     angle = float(angle)
     vin = float(vin) 				#assumption for relating velocity and bike's tilt- 
     vfin = float(vfin)
-    accel =( vfin - vin )#/4  #this makes acceleration = vfinal - vinitial with t=1/4 sec
+    accel =( vfin - vin )/4  #this makes acceleration = vfinal - vinitial with t=1/4 sec
+    accel = accel*3
     accel =  float(accel)
 
     thresh = angle/(vin+0.01) #incase the velocity is zero
-    if thresh > 2:
+    if thresh >= 2:
        tempthresh = "Excess tilt of bike(A0) "
     else:
        tempthresh = " - "   
     #writer.writerow([angle, vin,vfin, accel])    
-    if vin>45 :   
+    if vin>=45 :   
        tempvin = "SPEED LIMIT CROSSED!(A1)"
           
        #writer.writerow([angle, vin,vfin, accel,"SPEED LIMIT CROSSED!(A1)"])   
